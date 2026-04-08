@@ -1,5 +1,11 @@
-import { HomePage } from "@/pages/home/ui/HomePage";
+import { Outlet } from "react-router";
+import Header from "@/widgets/header/ui/Header";
 
 export function App() {
-    return <HomePage />;
+    return (
+        <>
+            <Header />
+            <Outlet />
+        </>
+    );
 }
