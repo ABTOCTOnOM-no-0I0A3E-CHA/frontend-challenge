@@ -1,30 +1,32 @@
-import { useLocation, useNavigate } from "react-router";
 import { AppBar, Tabs, Tab } from "@mui/material";
+import type { Page } from "@/app/App";
 
 interface NavTab {
     label: string;
-    path: string;
+    page: Page;
     width: number;
 }
 
 const tabs: NavTab[] = [
     {
         label: "Все котики",
-        path: "/",
+        page: "home",
         width: 120,
     },
     {
         label: "Любимые котики",
-        path: "/favorites",
+        page: "favorites",
         width: 173,
     },
 ];
 
-const Header = () => {
-    const path = useLocation().pathname;
-    const navigate = useNavigate();
+interface HeaderProps {
+    currentPage: Page;
+    onChangePage: (page: Page) => void;
+}
 
-    const currentTab = tabs.findIndex((tab) => tab.path === path);
+const Header = ({ currentPage, onChangePage }: HeaderProps) => {
+    const currentTab = tabs.findIndex((tab) => tab.page === currentPage);
 
     return (
         <AppBar
@@ -39,14 +41,14 @@ const Header = () => {
         >
             <Tabs
                 value={currentTab === -1 ? 0 : currentTab}
-                onChange={(_, newValue) => navigate(tabs[newValue].path)}
+                onChange={(_, newValue) => onChangePage(tabs[newValue].page)}
                 textColor="inherit"
                 slotProps={{ indicator: { style: { display: "none" } } }}
                 sx={{ height: "100%" }}
             >
                 {tabs.map((tab) => (
                     <Tab
-                        key={tab.path}
+                        key={tab.page}
                         label={tab.label}
                         sx={{
                             width: tab.width,
@@ -58,11 +60,13 @@ const Header = () => {
                             textTransform: "none",
                             transition: "all .2s ease",
                             color:
-                                path === tab.path
+                                currentPage === tab.page
                                     ? "#ffffff"
                                     : "rgba(255, 255, 255, 0.7)",
                             backgroundColor:
-                                path === tab.path ? "#1E88E5" : "transparent",
+                                currentPage === tab.page
+                                    ? "#1E88E5"
+                                    : "transparent",
                             fontFamily: "'Roboto', sans-serif",
                             "&:hover": {
                                 backgroundColor: "#1E88E5",
