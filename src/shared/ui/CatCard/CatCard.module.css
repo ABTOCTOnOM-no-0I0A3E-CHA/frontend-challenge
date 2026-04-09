@@ -1,0 +1,79 @@
+@reference "../../../index.css";
+
+.card {
+    @apply w-56.25 aspect-square relative overflow-hidden transform-gpu will-change-transform transition-transform duration-200;
+}
+
+.card:hover {
+    transform: scale(1.13776);
+    box-shadow:
+        0px 6px 5px rgba(0, 0, 0, 0.24),
+        0px 9px 18px rgba(0, 0, 0, 0.18);
+}
+
+.image {
+    @apply block w-full h-full object-cover;
+}
+
+.gradient {
+    @apply pointer-events-none absolute inset-x-0 bottom-0 h-[84px] opacity-0 transition-opacity duration-200;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 58.85%);
+}
+
+.card:hover .gradient {
+    @apply opacity-100;
+}
+
+.favoriteBtn {
+    @apply absolute cursor-pointer opacity-0 bg-transparent border-0 p-0;
+    @apply transition-all duration-200;
+    right: 13px;
+    bottom: 17px;
+    color: #f24e1e;
+}
+
+.card:hover .favoriteBtn {
+    @apply opacity-100;
+    transform: scale(0.87892);
+}
+
+/* Кот уже в избранном — кнопка всегда видна */
+.favoriteBtnActive {
+    @apply opacity-100;
+    color: #ff3a00;
+}
+
+/* Ожидание удаления — визуальный сигнал пользователю */
+.favoriteBtnPending {
+    @apply opacity-40;
+}
+
+.favoriteBtnWrapper {
+    @apply relative w-[42px] aspect-square;
+}
+
+.outlinedHeartIcon {
+    @apply absolute transition-opacity duration-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[42px];
+}
+
+.filledHeartIcon {
+    @apply absolute opacity-0 transition-opacity duration-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[42px];
+}
+
+/* Hover на кнопке — показываем заливку */
+.favoriteBtn:hover .filledHeartIcon {
+    @apply opacity-100;
+}
+
+.favoriteBtn:hover .outlinedHeartIcon {
+    @apply opacity-0;
+}
+
+/* Если кот в избранном — заливка показана всегда */
+.favoriteBtnActive .filledHeartIcon {
+    @apply opacity-100;
+}
+
+.favoriteBtnActive .outlinedHeartIcon {
+    @apply opacity-0;
+}

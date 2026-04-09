@@ -1,0 +1,10 @@
+@reference "../../../index.css";
+
+.grid {
+    @apply grid gap-12 pt-12 px-15.5 mb-12;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+
+.empty {
+    @apply text-center pt-20 text-lg text-black/40;
+}
