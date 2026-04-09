@@ -10,15 +10,17 @@ export function FavoritesPage() {
     }
 
     return (
-        <div className={styles.grid}>
-            {favorites.map((cat) => (
-                <CatCard
-                    key={cat.id}
-                    cat={cat}
-                    isFavorite
-                    onFavoriteClick={toggle}
-                />
-            ))}
-        </div>
+        <main>
+            <section className={styles.grid}>
+                {favorites.map((cat) => (
+                    <CatCard
+                        key={cat.id}
+                        cat={cat}
+                        isFavorite={true}
+                        onFavoriteClick={toggle}
+                    />
+                ))}
+            </section>
+        </main>
     );
 }

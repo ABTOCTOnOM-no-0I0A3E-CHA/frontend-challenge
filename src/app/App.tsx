@@ -11,8 +11,12 @@ export function App() {
     return (
         <>
             <Header currentPage={page} onChangePage={setPage} />
-            {page === "home" && <HomePage />}
-            {page === "favorites" && <FavoritesPage />}
+            <div style={{ display: page === "home" ? "block" : "none" }}>
+                <HomePage />
+            </div>
+            <div style={{ display: page === "favorites" ? "block" : "none" }}>
+                <FavoritesPage />
+            </div>
         </>
     );
 }

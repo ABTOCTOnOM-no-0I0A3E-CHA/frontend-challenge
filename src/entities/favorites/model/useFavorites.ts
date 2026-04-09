@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { Cat } from "@/entities/cat/model/types";
 
-const KEY = "favorites";
+interface FavoritesState {
+    favorites: Cat[];
+    toggle: (cat: Cat) => void;
+}
 
-const read = (): Cat[] => {
-    try {
-        return JSON.parse(localStorage.getItem(KEY) ?? "[]");
-    } catch {
-        return [];
-    }
-};
+export const useFavorites = create<FavoritesState>()(
+    persist(
+        (set) => ({
+            favorites: [],
+            toggle: (cat) =>
+                set((state) => {
+                    const isFavorite = state.favorites.some(
+                        (c) => c.id === cat.id,
+                    );
+                    const next = isFavorite
+                        ? state.favorites.filter((c) => c.id !== cat.id)
+                        : [...state.favorites, cat];
 
-export const useFavorites = () => {
-    const [favorites, setFavorites] = useState<Cat[]>(read);
-
-    const toggle = (cat: Cat) => {
-        const next = favorites.some((c) => c.id === cat.id)
-            ? favorites.filter((c) => c.id !== cat.id)
-            : [...favorites, cat];
-
-        localStorage.setItem(KEY, JSON.stringify(next));
-        setFavorites(next);
-    };
-
-    return { favorites, toggle };
-};
+                    return { favorites: next };
+                }),
+        }),
+        {
+            name: "favorites",
+        },
+    ),
+);
