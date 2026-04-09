@@ -12,13 +12,15 @@ export function HomePage() {
     const sentinelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (isLoading) return;
+
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) loadMore();
         });
 
         if (sentinelRef.current) observer.observe(sentinelRef.current);
         return () => observer.disconnect();
-    }, []);
+    }, [isLoading]);
 
     return (
         <main>
@@ -47,7 +49,7 @@ export function HomePage() {
                         ...не получилось загрузить котиков: {error}...
                     </p>
                 )}
-
+                <p className={styles.loadMore}>...загружаем еще котиков...</p>
                 <div ref={sentinelRef} />
             </section>
         </main>
