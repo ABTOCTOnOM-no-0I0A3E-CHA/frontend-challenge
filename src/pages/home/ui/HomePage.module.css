@@ -5,6 +5,13 @@
     grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
 }
 
+@media (max-width: 36rem) {
+    .grid {
+        grid-template-columns: 14.0625rem;
+        justify-content: center;
+    }
+}
+
 .skeleton {
     @apply w-56.25 aspect-square bg-black/10 animate-pulse;
 }
