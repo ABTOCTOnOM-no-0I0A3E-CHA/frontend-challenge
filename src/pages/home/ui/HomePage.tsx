@@ -24,7 +24,7 @@ export function HomePage() {
 
     return (
         <main>
-            <section>
+            <section className="max-w-[1440px] mx-auto">
                 <div className={styles.grid}>
                     {cats.map((cat) => (
                         <CatCard
