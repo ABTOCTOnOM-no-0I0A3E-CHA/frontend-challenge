@@ -1,0 +1,56 @@
+@reference "../../../index.css";
+
+.grid {
+    @apply grid gap-12 pt-12 px-15.5 mb-12;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+}
+
+.skeleton {
+    @apply w-56.25 aspect-square bg-black/10 animate-pulse;
+}
+
+.error {
+    @apply text-red-600 col-span-full;
+}
+
+.card {
+    @apply w-56.25 aspect-square relative overflow-hidden transform-gpu will-change-transform transition-transform duration-200;
+}
+
+.card:hover {
+    transform: scale(1.13776);
+}
+
+.image {
+    @apply block w-full h-full object-cover;
+}
+
+.gradient {
+    @apply pointer-events-none absolute inset-x-0 bottom-0 h-[84px] opacity-0 transition-opacity duration-200;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 58.85%);
+}
+
+.card:hover .gradient {
+    @apply opacity-100;
+}
+
+.favoriteBtn {
+    @apply absolute cursor-pointer opacity-0 transition-all duration-200 bg-transparent border-0 p-0;
+    right: 15px;
+    bottom: 19px;
+}
+
+.card:hover .favoriteBtn {
+    @apply opacity-100;
+    transform: scale(0.87892);
+}
+
+.heartIcon {
+    @apply w-12;
+}
+
+.loadMore {
+    @apply text-sm text-center mb-12;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+}
